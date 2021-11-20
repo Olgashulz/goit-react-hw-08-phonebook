@@ -1,6 +1,6 @@
-export const visibleContacts = ({ items, filter }) => {
-    return items.filter(contact =>
-        contact.name.toLowerCase().trim().includes(filter.toLowerCase().trim())
+export const visibleContacts = ({ contacts }) => {
+    return contacts.items.filter(contact =>
+        contact.name.toLowerCase().trim().includes(contacts.filter.toLowerCase().trim())
     );
 };
 

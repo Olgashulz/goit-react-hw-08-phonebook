@@ -12,15 +12,36 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-const persistConfig = {
+// import { todosReducer } from './todos';
+import { authReducer } from './auth';
+
+const middleware = [
+    ...getDefaultMiddleware({
+        serializableCheck: {
+            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+    }),
+];
+
+const authPersistConfig = {
+    key: 'auth',
+    storage,
+    whitelist: ['token'],
+};
+
+const contactsPersistConfig = {
     key: 'contacts',
     storage,
 }
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+// const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const store = configureStore({
-    reducer: persistedReducer,
+    // reducer: persistedReducer,
+    reducer: {
+        auth: persistReducer(authPersistConfig, authReducer),
+        contacts: persistReducer(contactsPersistConfig, rootReducer)
+    },
     middleware: getDefaultMiddleware({
         serializableCheck: {
             ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
