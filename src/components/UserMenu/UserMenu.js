@@ -28,7 +28,6 @@ export default function UserMenu() {
             <span style={styles.name}>Добро пожаловать, </span>
             {/* <button type="button"> */}
             <button type="button" onClick={() => dispatch(authOperations.logOut())}>
-
                 Выйти
             </button>
         </div>

@@ -5,6 +5,7 @@ const initialState = {
     user: { name: null, email: null },
     token: null,
     isLoggedIn: false,
+
 };
 
 const authSlice = createSlice({
@@ -29,6 +30,7 @@ const authSlice = createSlice({
         [authOperations.fetchCurrentUser.fulfilled](state, action) {
             state.user = action.payload;
             state.isLoggedIn = true;
+            console.log(state.contacts.items);
         },
     },
 });
