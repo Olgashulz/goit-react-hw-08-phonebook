@@ -24,6 +24,7 @@ export default function HomeView() {
                         className={styles.button_contacts}
                         activeStyle={styles.activeLink}
                     >
+
                         Contacts
                     </NavLink> :
                     <NavLink

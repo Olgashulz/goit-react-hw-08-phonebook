@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 const token = {
@@ -16,19 +17,7 @@ const token = {
  * POST @ /users/signup
  * body: { name, email, password }
  * После успешной регистрации добавляем токен в HTTP-заголовок
- * 
- * 
- */
-// export const register = createAsyncThunk('auth/register', async credentials => {
-//     try {
-//         const { data } = await axios.post('/users/signup', credentials);
-//         // token.set(data.token);
-//         return data;
-//     } catch (error) {
-//         // TODO: Добавить обработку ошибки error.message
-//     }
-// });
-
+  */
 export const register = createAsyncThunk(
     'auth/register',
     async (credentials, { rejectWithValue }) => {
@@ -41,34 +30,39 @@ export const register = createAsyncThunk(
         }
     },
 );
+
 /*
  * POST @ /users/login
  * body: { email, password }
  * После успешного логина добавляем токен в HTTP-заголовок
  */
-export const logIn = createAsyncThunk('auth/login', async credentials => {
-    try {
-        const { data } = await axios.post('/users/login', credentials);
-        token.set(data.token);
-        return data;
-    } catch (error) {
-        // TODO: Добавить обработку ошибки error.message
-    }
-});
+export const logIn = createAsyncThunk(
+    'auth/login',
+    async (credentials, { rejectWithValue }) => {
+        try {
+            const { data } = await axios.post('/users/login', credentials);
+            token.set(data.token);
+            return data;
+        } catch (error) {
+            return rejectWithValue(error.data);
+        }
+    });
 
 /*
  * POST @ /users/logout
  * headers: Authorization: Bearer token
  * После успешного логаута, удаляем токен из HTTP-заголовка
  */
-export const logOut = createAsyncThunk('auth/logout', async () => {
-    try {
-        await axios.post('/users/logout');
-        token.unset();
-    } catch (error) {
-        // TODO: Добавить обработку ошибки error.message
-    }
-});
+export const logOut = createAsyncThunk(
+    'auth/logout',
+    async (_, { rejectWithValue }) => {
+        try {
+            await axios.post('/users/logout');
+            token.unset();
+        } catch (error) {
+            return rejectWithValue(error.data);
+        }
+    });
 /*
  * GET @ /users/current
  * headers:
@@ -94,7 +88,7 @@ export const fetchCurrentUser = createAsyncThunk(
             const { data } = await axios.get('/users/current');
             return data;
         } catch (error) {
-            // TODO: Добавить обработку ошибки error.message
+            console.log(error)
         }
     },
 );

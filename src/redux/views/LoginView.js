@@ -1,7 +1,11 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as authOperations from '../auth/auth-operations';
-import styles from './RegisterView.module.css'
+import styles from './RegisterView.module.css';
+import { NavLink } from 'react-router-dom';
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function LoginView() {
@@ -23,6 +27,8 @@ export default function LoginView() {
 
     const handleSubmit = e => {
         e.preventDefault();
+        if (!email || !password) return toast.error('Please enter your contact details!')
+
         dispatch(authOperations.logIn({ email, password }));
         setEmail('');
         setPassword('');
@@ -36,8 +42,14 @@ export default function LoginView() {
             </span>
 
             <form onSubmit={handleSubmit} className={styles.form} autoComplete="off">
-                {/* <form style={styles.form} autoComplete="off"> */}
-                <button type="submit" className={styles.closeBtn}>х</button>
+                <NavLink
+                    to="/"
+                    exact
+                    className={styles.closeBtn}
+                    activeStyle={styles.activeLink}
+                >
+                    X
+                </NavLink>
 
                 <label className={styles.labelForm}>
                     E-mail

@@ -1,21 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { authOperations } from '../../redux/auth';
-import defaultAvatar from '../../pictures/icons/sign.png';
-import * as authSelectors from '../../redux/auth/auth-selectors';
 
-const styles = {
-    container: {
-        display: 'flex',
-        alignItems: 'center',
-    },
-    avatar: {
-        marginRight: 4,
-    },
-    name: {
-        fontWeight: 700,
-        marginRight: 12,
-    },
-};
+import { authOperations } from '../../redux/auth';
+import defaultAvatar from '../../pictures/icons/hi.png';
+import * as authSelectors from '../../redux/auth/auth-selectors';
+import styles from "./UserMenu.module.css"
+
 
 export default function UserMenu() {
     const dispatch = useDispatch();
@@ -23,12 +12,10 @@ export default function UserMenu() {
     const avatar = defaultAvatar;
 
     return (
-        <div style={styles.container}>
-            <img src={avatar} alt="" width="32" style={styles.avatar} />
-            <span style={styles.name}>Добро пожаловать, </span>
-            {/* <button type="button"> */}
-            <button type="button" onClick={() => dispatch(authOperations.logOut())}>
-                Выйти
+        <div className={styles.container}>
+            <img src={avatar} alt="" width="30" className={styles.avatar} />
+            <span className={styles.name}>{name}</span>
+            <button type="button" className={styles.btn} onClick={() => dispatch(authOperations.logOut())}>
             </button>
         </div>
     );

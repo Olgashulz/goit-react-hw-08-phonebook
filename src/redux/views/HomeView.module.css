@@ -1,8 +1,8 @@
-.container {
+/* .container {
   max-width: 375px;
   margin: auto;
   padding: 20px;
-}
+} */
 
 .title {
   font-family: 'Grechen Fuemen', cursive;
@@ -22,12 +22,9 @@
 }
 
 .phone {
-  /* margin-left: 8px; */
   width: 200px;
   height: 370px;
-  /* background-color: aquamarine; */
   margin: auto;
-  /* margin-top: 60px; */
   display: flex;
   flex-direction: column;
   border: 8px solid #899ad0;
@@ -45,9 +42,6 @@
   border-end-start-radius: 10px;
   height: 15px;
   width: 100px;
-  /* float: left; */
-  /* margin: 0 6px 0 0; */
-  /* position: absolute; */
   margin: auto;
   position: absolute;
   top: 0;
@@ -153,8 +147,6 @@
 }
 
 .button_orange:hover {
-  /* background-color: #dc8960;
-  transition: 1s ease-in-out; */
   background-color: #dc8960;
   transition: background-color 1s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
@@ -167,18 +159,16 @@
   .container {
     max-width: 1024px;
     min-height: 1000px;
-    background-image: url('../../pictures/bg5.png');
-    /* url('../../pictures/banner2.png'); */
     background-repeat: no-repeat;
     background-size: contain;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  /* .container {
-    background-size: 100%;
+  .container {
+    background-image: url('../../pictures/bg5.png');
   }
-} */
+
   .title {
     font-family: 'Grechen Fuemen', cursive;
     font-size: 2.5rem;

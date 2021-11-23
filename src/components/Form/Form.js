@@ -1,25 +1,19 @@
 import { useState } from "react";
-import styles from './Form.module.css';
-// import { addContact, addContactRequest, addContactSuccess } from "../../redux/actions";
-import { useDispatch, useSelector } from "react-redux";
-// import { visibleContacts } from '../../redux/selectors';
-
 import { operations } from '../../redux';
-// import * as operations from '../../redux/operations';
+import { useDispatch, useSelector } from "react-redux";
 
 import shortid from 'shortid';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-
-
+import styles from './Form.module.css';
 
 export default function Form(props) {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
     const [disabled, setDisabled] = useState(false);
 
-    const contacts = useSelector(state => state.items);
-
-
+    const contacts = useSelector(state => state.contacts.items);
     const dispatch = useDispatch();
 
     const handleInputChange = event => {
@@ -42,7 +36,6 @@ export default function Form(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
         const newContact = {
             id: shortid.generate(),
             name: name,
@@ -52,20 +45,21 @@ export default function Form(props) {
         dispatch(operations.addContact(newContact));
         resetForm();
     }
+
     const resetForm = () => {
         setName('');
         setNumber('');
     }
 
 
-    // const findNameInContact = (event) => {
-    //     if (contacts.find((contact) =>
-    //         contact.name.toLowerCase() === event.currentTarget.value.toLowerCase()
-    //     )) {
-    //         setDisabled(true)
-    //         alert(`${event.currentTarget.value} is already in contacts.`)
-    //     }
-    // }
+    const findNameInContact = (event) => {
+        if (contacts.find((contact) =>
+            contact.name.toLowerCase() === event.currentTarget.value.toLowerCase()
+        )) {
+            setDisabled(true)
+            toast.error(`${event.currentTarget.value} is already in contacts.`)
+        }
+    }
 
     return (
         <form
@@ -78,7 +72,7 @@ export default function Form(props) {
                     name="name"
                     value={name}
                     onChange={handleInputChange}
-                    // onBlur={findNameInContact}
+                    onBlur={findNameInContact}
                     className={styles.inputForm}
                     pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                     title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."

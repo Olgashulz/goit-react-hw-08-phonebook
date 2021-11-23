@@ -54,6 +54,22 @@
   right: 1px;
 }
 
+.btn_redact {
+  background: url('../../pictures/icons/redact.png') no-repeat;
+  width: 32px;
+  height: 32px;
+  background-size: contain;
+  border: none;
+  margin-left: 15px;
+  cursor: pointer;
+  /* -webkit-box-shadow: 3px 2px 8px -1px #000000;
+  box-shadow: 3px 2px 8px -1px #000000; */
+}
+
+.btn_redact:hover {
+  background: url('../../pictures/icons/redactHover.png') no-repeat;
+}
+
 @media screen and (min-width: 768px) {
   .contactsList {
     display: flex;
