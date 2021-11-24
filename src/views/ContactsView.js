@@ -1,7 +1,7 @@
-import Form from '../../components/Form';
-import Contacts from '../../components/Contacts';
-import Filter from "../../components/Filter";
-import styles from '../../App.module.css';
+import Form from '../components/Form';
+import Contacts from '../components/Contacts';
+import Filter from "../components/Filter";
+import styles from '../App.module.css';
 
 export default function ContactsView() {
 

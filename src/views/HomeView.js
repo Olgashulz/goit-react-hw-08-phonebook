@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './HomeView.module.css';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import * as authSelectors from '../../redux/auth/auth-selectors';
-import * as authOperations from '../../redux/auth/auth-operations';
+import * as authSelectors from '../redux/auth/auth-selectors';
+import * as authOperations from '../redux/auth/auth-operations';
 
 
 export default function HomeView() {

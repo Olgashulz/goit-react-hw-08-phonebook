@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import * as authOperations from '../auth/auth-operations';
+import * as authOperations from '../redux/auth/auth-operations';
 import styles from './RegisterView.module.css';
 import { NavLink } from 'react-router-dom';
 
@@ -8,14 +8,17 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-export default function LoginView() {
-    const dispatch = useDispatch();
 
+export default function RegisterView() {
+    const dispatch = useDispatch();
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleChange = ({ target: { name, value } }) => {
         switch (name) {
+            case 'name':
+                return setName(value);
             case 'email':
                 return setEmail(value);
             case 'password':
@@ -27,9 +30,11 @@ export default function LoginView() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        if (!email || !password) return toast.error('Please enter your contact details!')
 
-        dispatch(authOperations.logIn({ email, password }));
+        if (!name || !email || !password) return toast.error('Please enter your contact details!')
+
+        dispatch(authOperations.register({ name, email, password }));
+        setName('');
         setEmail('');
         setPassword('');
     };
@@ -38,8 +43,9 @@ export default function LoginView() {
         <div>
             <h1 className={styles.title}> Phonebook </h1>
             <span className={styles.subtitle}>
-                Sign in to use all the features of the application.
+                Simple registration and convenient use this application.
             </span>
+
 
             <form onSubmit={handleSubmit} className={styles.form} autoComplete="off">
                 <NavLink
@@ -50,6 +56,15 @@ export default function LoginView() {
                 >
                     X
                 </NavLink>
+                <label className={styles.labelForm}>
+                    Name
+                    <input
+                        type="text"
+                        name="name"
+                        value={name}
+                        onChange={handleChange}
+                        className={styles.inputForm} />
+                </label>
 
                 <label className={styles.labelForm}>
                     E-mail
@@ -73,9 +88,12 @@ export default function LoginView() {
                     />
                 </label>
 
-
-                <button type="submit" className={styles.formBtn}>Login</button>
+                <button
+                    type="submit"
+                    className={styles.formBtn}>
+                    Registration</button>
             </form>
         </div>
     );
 }
+
